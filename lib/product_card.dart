@@ -41,3 +41,6 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
+
+
+//navigator widget gets the nearest NavigatorState
