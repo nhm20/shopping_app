@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/global_variables.dart';
-import 'package:shopping_app/product_card.dart';
-import 'package:shopping_app/product_details_page.dart';
+import 'package:shopping_app/widgets/product_card.dart';
+import 'package:shopping_app/pages/product_details_page.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -28,6 +28,7 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
@@ -93,31 +94,61 @@ class _ProductListState extends State<ProductList> {
               },
             ),
           ),
+
           Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ProductDetailsPage(product: product),
-                      ),
-                    );
-                  },
-                  child: ProductCard(
-                    title: product['title'] as String,
-                    price: product['prices'] as double,
-                    image: product['imageUrl'] as String,
-                    backgroundColor: index.isEven
-                        ? Color.fromRGBO(216, 240, 253, 1)
-                        : Color.fromRGBO(256, 247, 249, 1),
+            child: size.width > 650
+                ? GridView.builder(
+                    itemCount: products.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 2,
+                    ),
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductDetailsPage(product: product),
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                          title: product['title'] as String,
+                          price: product['prices'] as double,
+                          image: product['imageUrl'] as String,
+                          backgroundColor: index.isEven
+                              ? Color.fromRGBO(216, 240, 253, 1)
+                              : Color.fromRGBO(256, 247, 249, 1),
+                        ),
+                      );
+                    },
+                  )
+                : ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductDetailsPage(product: product),
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                          title: product['title'] as String,
+                          price: product['prices'] as double,
+                          image: product['imageUrl'] as String,
+                          backgroundColor: index.isEven
+                              ? Color.fromRGBO(216, 240, 253, 1)
+                              : Color.fromRGBO(256, 247, 249, 1),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
