@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/global_variables.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -9,18 +10,26 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Cart'),
       ),
-      body: Center(
-        child: Text(
-          'Your cart is empty',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Action to add items to the cart
+      body: 
+      ListView.builder(
+        itemCount: cart.length,
+        itemBuilder: (context, index) {
+          final cartItem = cart[index];
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundImage: AssetImage(cartItem['imageUrl'] as String),
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                // Handle remove item from cart
+              },
+              icon: Icon(Icons.delete, color: Colors.red),
+            ),
+            title: Text(cartItem['title'] as String),
+            subtitle: Text('Size: ${cartItem['size']}'),
+          );
         },
-        child: Icon(Icons.add_shopping_cart),
-      ),
+      ),  
     );
   }
-}
+}  
