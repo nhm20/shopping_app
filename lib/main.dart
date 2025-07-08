@@ -14,8 +14,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shopping App',
       theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(),
-        inputDecorationTheme: InputDecorationTheme(
+        textTheme: GoogleFonts.latoTextTheme().copyWith(
+          titleMedium: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodySmall: const TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
         ),

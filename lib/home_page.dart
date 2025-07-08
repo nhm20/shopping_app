@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/global_variables.dart';
+import 'package:shopping_app/product_card.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -95,18 +97,22 @@ class _HomepageState extends State<Homepage> {
                 },
               ),
             ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(
+                    title: product['title'] as String,
+                    price: product['prices'] as double,
+                    image: product['imageUrl'] as String,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-//inheritanceWidget
-// In Flutter, an InheritedWidget is a special type of widget that allows data to be
-// efficiently passed down the widget tree. It is used to share data between widgets
-// without having to pass the data explicitly through the constructor of each widget.
-//to the parent also 
-
-//theme.of(context) grab the theme of the context which is nearest to the widget
-// and apply it to the widget
