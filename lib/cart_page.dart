@@ -19,22 +19,36 @@ class CartPage extends StatelessWidget {
               backgroundImage: AssetImage(cartItem['imageUrl'] as String),
             ),
             trailing: IconButton(
+              
               onPressed: () {
                showDialog(context: context, 
+               barrierDismissible: false,
                builder:(context){
-                 return Dialog(
-                   child:
-                     Text('Are you sure you want to remove ${cartItem['title']} from the cart?'),
-                   
+                 return AlertDialog(
+                   content: Text('Are you sure you want to remove ${cartItem['title']} from the cart?'),
+                   actions: [
+                     TextButton(
+                       onPressed: () {
+                         Navigator.of(context).pop();
+                       },
+                       child: Text('Cancel'),
+                     ),
+                     TextButton(
+                       onPressed: () {
+                         Provider.of<CartProvider>(context, listen: false).removeProduct(cartItem);
+                         ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                             content: Text('${cartItem['title']} removed from cart'),
+                             duration: const Duration(seconds: 2),
+                           ),
+                         );
+                         Navigator.of(context).pop();
+                       },
+                       child: Text('Remove'),
+                     ),
+                   ],
                  );
                });
-                Provider.of<CartProvider>(context, listen: false).removeProduct(cartItem);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${cartItem['title']} removed from cart'),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
               },
               icon: Icon(Icons.delete, color: Colors.red),
             ),
