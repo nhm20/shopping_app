@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,15 +16,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(),
         inputDecorationTheme: InputDecorationTheme(
-          hintStyle:TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          )
+          hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
         ),
-        // colorScheme: ColorScheme(brightness: brightness, primary: primary, onPrimary: onPrimary, secondary: secondary, onSecondary: onSecondary, error: error, onError: onError, surface: surface, onSurface: onSurface)
-        // colorScheme: ColorScheme.dark(),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color.fromRGBO(254, 206, 1, 1),
+          primary: Color.fromRGBO(254, 206, 1, 1),
         ),
       ),
       home: const Homepage(),
