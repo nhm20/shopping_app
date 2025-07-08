@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/cart_provider.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final Map<String, Object> product;
@@ -10,6 +12,35 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   int selectedSize = 0;
+  void onTap() {
+    if(selectedSize!=0) {
+      Provider.of<CartProvider>(
+        context,
+        listen: false,
+      ).addProduct({'id':widget.product['id'], 
+        'title': widget.product['title'], 
+        'imageUrl': widget.product['imageUrl'], 
+        'size': selectedSize, 
+        'prices': widget.product['prices'],
+        'company': widget.product['company'],
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${widget.product['title']} added to cart'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a size'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +51,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             widget.product['title'] as String,
             style: Theme.of(context).textTheme.titleLarge,
           ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Image.asset(widget.product['imageUrl'] as String),
+          ),
           const Spacer(flex: 2),
-
           Container(
             height: 250,
             decoration: BoxDecoration(
@@ -32,8 +67,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '\$${(widget.product['prices'] as num).toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  '\$${(widget.product['prices'])}',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
@@ -66,7 +101,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onTap,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       minimumSize: const Size(double.infinity, 50),

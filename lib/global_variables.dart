@@ -32,14 +32,3 @@ final products = [
     'imageUrl': 'assets/images/shoes4.png',
   },
 ];
-
-final cart = [
-  {
-    "id": 3,
-    'title': 'Adidas Shoes',
-    'prices': 100,
-    'sizes': '8',
-    'company': 'Adidas',
-    'imageUrl': 'assets/images/shoes1.png',
-  },
-];
