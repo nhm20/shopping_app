@@ -67,7 +67,7 @@ class _HomepageState extends State<Homepage> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: GestureDetector(
-                     onTap: () {
+                      onTap: () {
                         setState(() {
                           selectedFilter = label;
                         });
