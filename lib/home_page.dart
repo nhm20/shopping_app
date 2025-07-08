@@ -9,18 +9,22 @@ class Homepage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              'Shoe\nCollection',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Shoe\nCollection',
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
+                Expanded(child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                ))
+              ],
             ),
           ],
         ),

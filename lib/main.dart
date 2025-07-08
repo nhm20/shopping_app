@@ -16,9 +16,17 @@ class MyApp extends StatelessWidget {
       title: 'Shopping App',
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle:TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          )
+        ),
         // colorScheme: ColorScheme(brightness: brightness, primary: primary, onPrimary: onPrimary, secondary: secondary, onSecondary: onSecondary, error: error, onError: onError, surface: surface, onSurface: onSurface)
         // colorScheme: ColorScheme.dark(),
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(254, 206, 1, 1))
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color.fromRGBO(254, 206, 1, 1),
+        ),
       ),
       home: const Homepage(),
     );
