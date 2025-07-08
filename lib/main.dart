@@ -13,6 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return MultiProvider(providers:
+    // [
+    //   ChangeNotifierProvider<CartProvider>(
+    //     create: (context) => CartProvider(),
+    //   ),
+    //    ChangeNotifierProvider<AnotherProvider>(
+    //      create: (context) => AnotherProvider(),
+    //   ),
+    // ])
     return ChangeNotifierProvider(
       create: (context) => CartProvider(),
       child: MaterialApp(
@@ -23,13 +32,8 @@ class MyApp extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
-            bodySmall: const TextStyle(
-              fontSize: 16,
-            ),
-            titleLarge: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-            )
+            bodySmall: const TextStyle(fontSize: 16),
+            titleLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
           ),
           inputDecorationTheme: const InputDecorationTheme(
             hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -40,10 +44,7 @@ class MyApp extends StatelessWidget {
             primary: Color.fromRGBO(254, 206, 1, 1),
           ),
           appBarTheme: AppBarTheme(
-            titleTextStyle: TextStyle(
-              fontSize: 20,
-              color:Colors.black,
-            )
+            titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
           ),
           useMaterial3: true,
         ),
