@@ -28,7 +28,6 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
@@ -96,12 +95,14 @@ class _ProductListState extends State<ProductList> {
           ),
 
           Expanded(
-            child: size.width > 650
-                ? GridView.builder(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 1080) {
+                  return GridView.builder(
                     itemCount: products.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 2,
+                      childAspectRatio: 1.75,
                     ),
                     itemBuilder: (context, index) {
                       final product = products[index];
@@ -124,8 +125,9 @@ class _ProductListState extends State<ProductList> {
                         ),
                       );
                     },
-                  )
-                : ListView.builder(
+                  );
+                } else {
+                  return ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       final product = products[index];
@@ -148,10 +150,16 @@ class _ProductListState extends State<ProductList> {
                         ),
                       );
                     },
-                  ),
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),
     );
   }
 }
+
+//layout builder is used to build the widget tree based on the constraints passed to it by parent widget
+//media query is used to get the size of the screen
